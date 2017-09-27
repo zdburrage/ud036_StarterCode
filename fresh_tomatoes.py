@@ -18,7 +18,7 @@ main_page_head = '''
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
         body {
-            padding-top: 80px;
+            padding-top: 120px;
         }
         .figure
         {
@@ -114,7 +114,7 @@ main_page_content = '''
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="#">My favorite Movies!</a>
           </div>
         </div>
       </div>
@@ -123,6 +123,7 @@ main_page_content = '''
       {movie_tiles}
     </div>
   </body>
+  
 </html>
 '''
 
@@ -133,9 +134,12 @@ movie_tile_content = '''
     <div style="display: block;
     margin-left: auto;
     margin-right: auto;"class = "figure"><img src="{poster_image_url}" width="200" height="290"></div>
-    <h2>{movie_title} ({duration})</h2>
+    
+    <h2>{movie_title} </br>({duration})</h2>
     <h3 style = "font-family: Calibri">{storyline}</h3>
+    <a href = "http://www.google.com/search?q={movie_title}"> Search Google for {movie_title}</a>
 </div>
+
 '''
 
 
