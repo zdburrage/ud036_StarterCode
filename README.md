@@ -1,2 +1,4 @@
-# ud036_StarterCode
-Source code for a Movie Trailer website.
+In order to run the program:
+
+1. Download the repo as a zip file or fork the repo and clone it locally
+2. Open entertainment_center.py and run it
