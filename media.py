@@ -14,9 +14,9 @@ class Video():
 class TvShow(Video):
     """This is a child class of Video that inherits its properties title
     and duration. Its __init__ function calls the Video __init__ function
-    which sets the title and duration. Its(TvShow's) __init__ function also sets
-    the properties season and episode for the object equal to the
-    values passed in"""
+    which sets the title and duration. Its(TvShow's) __init__ function
+    also sets the properties season and episode for the object equal
+    to the values passed in"""
     def __init__(self, title, duration, season, episode):
         Video.__init__(self, title, duration)
         self.season = season
@@ -44,4 +44,4 @@ class Movie(Video):
         trailer_youtube_url field, which would ideally
         go to youtube and play the trailer of the
         desired movie"""
-        webbrowser.open(self.trailer_youtube_url)
+webbrowser.open(self.trailer_youtube_url)
