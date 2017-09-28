@@ -1,10 +1,4 @@
-import webbrowser
-import os
-import re
 
-
-# Styles and scripting for the page
-main_page_head = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,11 +84,7 @@ main_page_head = '''
         });
     </script>
 </head>
-'''
 
-
-# The main page layout and title bar
-main_page_content = '''
   <body style = "background-color: #dce6ee">
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
@@ -120,66 +110,74 @@ main_page_content = '''
       </div>
     </div>
     <div class="container">
-      {movie_tiles}
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="KYz2wyBy3kc" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="http://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" width="200" height="290"></div>
+    
+    <h2>Toy Story </br>(1:21:00)</h2>
+    <h3 style = "font-family: Calibri">A story of a boy and his toys that come to life</h3>
+    <a href = "http://www.google.com/search?q=Toy Story" target="_blank"> Search Google for Toy Story</a>
+</div>
+
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="G05Xdl5eGqo" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="http://www.cinemasterpieces.com/superbadjan08.jpg" width="200" height="290"></div>
+    
+    <h2>Superbad </br>(1:53:00)</h2>
+    <h3 style = "font-family: Calibri">Two friends go on a quest to have an awesome time at a party before they graduate</h3>
+    <a href = "http://www.google.com/search?q=Superbad" target="_blank"> Search Google for Superbad</a>
+</div>
+
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="eUdM9vrCbow" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="http://www.heyuguys.com/images/2012/10/Django-Unchained-International-Poster.jpg" width="200" height="290"></div>
+    
+    <h2>Django: Unchained </br>(2:45:00)</h2>
+    <h3 style = "font-family: Calibri">A slave escapes from his owner and rescues his wife whom he hasn't seen in years</h3>
+    <a href = "http://www.google.com/search?q=Django: Unchained" target="_blank"> Search Google for Django: Unchained</a>
+</div>
+
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="um5DuTLzw-I" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="https://www.movieposter.com/posters/archive/main/80/MPW-40339" width="200" height="290"></div>
+    
+    <h2>I Love You, Man </br>(1:45:00)</h2>
+    <h3 style = "font-family: Calibri">A man struggling to find male friends meets an instant BFF right before he and his wife get married</h3>
+    <a href = "http://www.google.com/search?q=I Love You, Man" target="_blank"> Search Google for I Love You, Man</a>
+</div>
+
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="vgqG3ITMv1Q" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="http://cdn.film-book.com/wp-content/uploads/2015/11/the-big-short-movie-poster-01.png" width="200" height="290"></div>
+    
+    <h2>The Big Short </br>(2:10:00)</h2>
+    <h3 style = "font-family: Calibri">Three groups of people discover the American Housing Crisis before it happens, and profit big on it.</h3>
+    <a href = "http://www.google.com/search?q=The Big Short" target="_blank"> Search Google for The Big Short</a>
+</div>
+
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="EgdoQ8Oxu2E" data-toggle="modal" data-target="#trailer">
+    <div style="display: block;
+    margin-left: auto;
+    margin-right: auto;"class = "figure"><img src="https://images-na.ssl-images-amazon.com/images/I/51TKV2HF1TL._SY445_.jpg" width="200" height="290"></div>
+    
+    <h2>A Walk to Remember </br>(1:42:00)</h2>
+    <h3 style = "font-family: Calibri">A jaded, aimless high school senior (Shane West) who falls in love with a guileless young woman (Mandy Moore) he and his friends once scorned</h3>
+    <a href = "http://www.google.com/search?q=A Walk to Remember" target="_blank"> Search Google for A Walk to Remember</a>
+</div>
+
+
     </div>
   </body>
   
 </html>
-'''
-
-
-# A single movie entry html template
-# Added google search link for each movie as well as duration and storyline
-movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <div style="display: block;
-    margin-left: auto;
-    margin-right: auto;"class = "figure"><img src="{poster_image_url}" width="200" height="290"></div>
-    
-    <h2>{movie_title} </br>({duration})</h2>
-    <h3 style = "font-family: Calibri">{storyline}</h3>
-    <a href = "http://www.google.com/search?q={movie_title}" target="_blank"> Search Google for {movie_title}</a>
-</div>
-
-'''
-
-
-def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
-    for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
-
-        # Append the tile for the movie with its content filled in
-        #Added duration and storyline fields
-        content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id,
-            storyline = movie.storyline,
-            duration = movie.duration
-        )
-    return content
-
-
-def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
-
-    # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
-
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
-
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)
