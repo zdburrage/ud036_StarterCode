@@ -44,4 +44,4 @@ class Movie(Video):
         trailer_youtube_url field, which would ideally
         go to youtube and play the trailer of the
         desired movie"""
-webbrowser.open(self.trailer_youtube_url)
+        webbrowser.open(self.trailer_youtube_url)
