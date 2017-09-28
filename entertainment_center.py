@@ -1,7 +1,12 @@
 import media
 import fresh_tomatoes
 
-# Constructing each movie
+"""Here, 6 movies are initialized by passing their corresponding
+properties into a constructor
+(title, duration, storyline, poster art, and youtube url).
+Each object is initialized as
+media.Movie() which references the media file and the Movie
+class"""
 toy_story = media.Movie("Toy Story", "1:21:00",
                         "A story of a boy and his toys that come to life",
                         "http://upload.wikimedia.org/" +
@@ -41,11 +46,16 @@ a_walk_to_remember = media.Movie("A Walk to Remember", "1:42:00",
                                  "https://images-na.ssl-images-amazon.com" +
                                  "/images/I/51TKV2HF1TL._SY445_.jpg",
                                  "https://www.youtube.com/watch?v=EgdoQ8Oxu2E")
-# Gathering movies in a list
+
+"""This gathers all of the movies initialized above and puts
+them into a list"""
 movies = [toy_story, superbad, django, ily_man,
           the_big_short, a_walk_to_remember]
 
-# Generate HTML page from function in fresh_tomatoes.py
+"""This function references the open_movies_page function from the
+fresh_tomatoes.py file and passes in the above created list of
+movies. This will create the web page and fill it with the
+appropriate movie data"""
 fresh_tomatoes.open_movies_page(movies)
 
 
